@@ -119,7 +119,7 @@
   * 👀allows creating gRPC server + gRPC client 👀
 * gRPC channel
   * uses
-    * create a client / -- binds to a -- service
+    * 👀create a client / -- binds to a -- service 👀
   * Protobuf-generated sources -- need to be bound to a -- channel
   * _Example:_ bind to the `SimpleGrpc` service | local server
 
