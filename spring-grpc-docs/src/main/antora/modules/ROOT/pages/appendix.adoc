@@ -5,7 +5,9 @@
 = Common application properties
 :page-section-summary-toc: 1
 
-Various properties can be specified inside your `application.properties` file, inside your `application.yml` file, or as command line switches.
-This appendix provides a list of common `Spring gRPC` properties.
+* list of common `Spring gRPC` properties
+* ways to specify
+    ** | `application.properties`
+    ** | `application.yml`
 
 include::partial$_configprops.adoc[]
