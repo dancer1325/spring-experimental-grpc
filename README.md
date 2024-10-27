@@ -96,7 +96,7 @@
 
   * `BindableService`
     * := interface /
-      * used by gRPC -- to bind -- services to the server
+      * used by gRPC -- to bind -- services to the gRPC server
   * `SimpleImplBase`
     * -- created by you from -- your Protobuf file
 
