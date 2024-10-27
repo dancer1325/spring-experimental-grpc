@@ -1,19 +1,24 @@
 [[server]]
 = GRPC Server
 
-This section describes core concepts that Spring gRPC uses on the server side. We recommend reading it closely to understand the ideas behind how Spring gRPC is implemented.
-You only need to provide one or more beans of type `BindableService` to create a gRPC server, provided the classpath contains an implementation of a `Server`. The `BindableService` is a gRPC service that can be bound to a server.
-The `Server` is the gRPC server that listens for incoming requests and routes them to the appropriate service implementation.
+* requirements
+    ** provide >=1 beans / type `BindableService`
+* `Server`
+    ** == gRPC server
+        *** listens for incoming requests
+        *** routes the incoming requests -- to the -- appropriate service implementation
 
 == Create a `BindableService`
 
-To create a gRPC server, you need to provide one or more beans of type `BindableService`.
-There are some `BindableServices` available off the shelf that you could include in your application (an example is the reflection service from the `grpc-services` artifact which allows clients to browse the metadata of your services and download the Portobuf files). 
-Very commonly, you will create your own `BindableService` by extending the generated service implementation from your Protobuf file.
-The easiest way to do it is to simply add a Spring `@Service` annotation to the implementation class and have it picked up by the `@ComponentScan` in your Spring Boot application.
+* _Example:_ reflection service | `grpc-services` artifact / allows clients can
+    ** browse your services' metadata
+    ** download the Protobuf files
+* create your own `BindableService`
+    ** check xref:ROOT:../../../../../../../README.md[here]
 
 == Netty Server
 
+* TODO:
 If you use the `spring-grpc-spring-boot-starter` dependency on its own, the `Server` is a Netty-based implementation.
 You can configure common features of the server by using the `grpc.server` prefix in `application.properties` or `application.yml`.
 For instance, to set the port to listen on, use `spring.grpc.server.port` (defaults to 9090).
@@ -58,8 +63,11 @@ dependencies {
 
 == Servlet Server
 
-Any servlet container can be used to run a gRPC server.
-Spring gRPC includes autoconfiguration that configures the server to use the servlet container if it detects that it is in a web application, so all you have to do is include `spring-boot-starter-web` in your application.
+* servlet container
+    ** -- can be used to -- run a gRPC server
+        *** HTTP POST requests -- are mapped to the -- paths / defined by the registered services (_Example:_ `/<service-name>/*`)
+* requirements
+    ** include `spring-boot-starter-web` | your application
 
 [source,xml]
 ----
@@ -73,7 +81,6 @@ Spring gRPC includes autoconfiguration that configures the server to use the ser
 </dependency>
 ----
 
-For Gradle users
 
 [source,gradle]
 ----
@@ -83,6 +90,5 @@ dependencies {
 }
 ----
 
-The `spring.grpc.server.*` properties will be ignored in facour of the regular `server.*` properties in this case.
-The servlet that is created is mapped to process HTTP POST requests to the paths defined by the registered services, as `/<service-name>/*`.
-Clients can connect to the server using that path, which is what any gRPC client library will do.
+* `spring.grpc.server.*` properties
+    ** 👀-- ignored in favour of the -- regular `server.*` 👀
